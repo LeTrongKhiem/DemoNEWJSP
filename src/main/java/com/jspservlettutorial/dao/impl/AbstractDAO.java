@@ -8,20 +8,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AbstractDAO<T> implements GenericDAO<T> {
+    //    public Connection getConnection() {
+//        Connection conn = null;
+//        String url = "jdbc:mysql://localhost:3306/newdemojsp";
+//        String username = "root";
+//        String pass = "";
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            conn = DriverManager.getConnection(url, username, pass);
+//        } catch (SQLException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        return conn;
+//
+//    }
     public Connection getConnection() {
-        Connection conn = null;
-        String url = "jdbc:mysql://localhost:3306/newdemojsp";
-        String username = "root";
-        String pass = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, pass);
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            String url = "jdbc:mysql://localhost:3306/newdemojsp";
+            String username = "root";
+            String pass = "";
+            return DriverManager.getConnection(url, username, pass);
+        } catch (ClassNotFoundException | SQLException e) {
+            return null;
         }
-        return conn;
-
     }
+
+//    public Connection getConnection() {
+//        try {
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//            String url = "jdbc:sqlserver://localhost;database=newjsptutorial;";
+//            String user = "sa";
+//            String password = "nana01218909214";
+//            return DriverManager.getConnection(url, user, password);
+//        } catch (ClassNotFoundException | SQLException e) {
+//            return null;
+//        }
+//
+//    }
 
     @Override
     public <T> List<T> query(String sql, RowMapper<T> rowMapper, Object... parameters) {

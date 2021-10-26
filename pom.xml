@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
+    <groupId>com.jspservlettutorial</groupId>
     <artifactId>DemoNewJSP</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>DemoNewJSP</name>
@@ -15,23 +15,36 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <junit.version>5.7.1</junit.version>
-        <jsp.api.version>3.8.3</jsp.api.version>
+        <jsp.api.version>2.0</jsp.api.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jstl.version>1.2</jstl.version>
         <sitemesh.version>2.4.2</sitemesh.version>
-        <mysql.version>8.0.13</mysql.version>
+        <mysql.version>8.0.26</mysql.version>
         <weld.servlet.version>2.4.8.Final</weld.servlet.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <sqlserver.version>9.2.1.jre8</sqlserver.version>
     </properties>
 
     <dependencies>
-
-        <!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
-        <!-- https://mvnrepository.com/artifact/org.apache.maven/maven-plugin-api -->
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-plugin-api</artifactId>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>${sqlserver.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
             <version>${jsp.api.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven/maven-plugin-api -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.maven</groupId>-->
+        <!--            <artifactId>maven-plugin-api</artifactId>-->
+        <!--            <version>${jsp.api.version}</version>-->
+        <!--        </dependency>-->
 
 
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
@@ -60,7 +73,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.15</version>
+            <version>${mysql.version}</version>
         </dependency>
 
 
@@ -99,6 +112,17 @@
             <version>1.9.13</version>
         </dependency>
         <!-- end json -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
     </dependencies>
 
     <build>

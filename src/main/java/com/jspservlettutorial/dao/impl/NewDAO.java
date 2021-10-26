@@ -53,7 +53,7 @@ public class NewDAO extends AbstractDAO<NewModel> implements INewDAO {
 
     @Override
     public List<NewModel> findAll() {
-        String sql = "select * from news";
+        String sql = "select * from `news`";
         return query(sql, new NewMapper());
     }
 
