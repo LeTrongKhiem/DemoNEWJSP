@@ -79,11 +79,20 @@
                                         </tbody>
                                     </table>
                                     <ul class="pagination" id="pagination"></ul>
-                                    <input type="hidden" value="" id="page" name="page"/> <input
-                                        type="hidden" value="" id="maxPageItem" name="maxPageItem"/>
-                                    <input type="hidden" value="" id="sortName" name="sortName"/>
-                                    <input type="hidden" value="" id="sortBy" name="sortBy"/> <input
-                                        type="hidden" value="" id="type" name="type"/>
+                                    <%--                                    <nav aria-label="Page navigation example">--%>
+                                    <%--                                        <ul class="pagination" id="pagination">--%>
+                                    <%--                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
+                                    <%--                                            <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
+                                    <%--                                            <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
+                                    <%--                                            <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+                                    <%--                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>--%>
+                                    <%--                                        </ul>--%>
+                                    <%--                                    </nav>--%>
+                                    <input type="hidden" value="" id="page" name="page"/>
+                                    <input type="hidden" value="" id="maxPageItem" name="maxPageItem"/>
+                                    <%--                                    <input type="hidden" value="" id="sortName" name="sortName"/>--%>
+                                    <%--                                    <input type="hidden" value="" id="sortBy" name="sortBy"/>--%>
+                                    <%--                                    <input type="hidden" value="" id="type" name="type"/>--%>
                                 </div>
                             </div>
                         </div>
@@ -95,21 +104,14 @@
 </div>
 <!-- /.main-content -->
 <script>
-    var totalPages = $
-    {
-        model.totalPage
-    }
-    ;
-    var currentPage = $
-    {
-        model.page
-    }
-    ;
+    var totalPages = "${model.totalPage}";
+    var currentPage = "${model.page}";
+    var visiblePages = ${model.maxPageItem};
     var limit = 2;
     $(function () {
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: totalPages,
-            visiblePages: 10,
+            visiblePages: visiblePages,
             startPage: currentPage,
             onPageClick: function (event, page) {
                 if (currentPage != page) {
@@ -124,30 +126,6 @@
         });
     });
 
-    $("#btnDelete").click(function () {
-        var data = {};
-        var ids = $('tbody input[type=checkbox]:checked').map(function () {
-            return $(this).val();
-        }).get();
-        data['ids'] = ids;
-        deleteNew(data);
-    });
-
-    function deleteNew(data) {
-        $
-            .ajax({
-                url: '${APIurl}',
-                type: 'DELETE',
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                success: function (result) {
-                    window.location.href = "${NewURL}?type=list&maxPageItem=2&page=1&message=delete_success";
-                },
-                error: function (error) {
-                    window.location.href = "${NewURL}?type=list&maxPageItem=2&page=1&message=error_system";
-                }
-            });
-    }
 </script>
 </body>
 </html>

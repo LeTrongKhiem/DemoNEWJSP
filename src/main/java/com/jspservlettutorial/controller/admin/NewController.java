@@ -3,6 +3,7 @@ package com.jspservlettutorial.controller.admin;
 import com.jspservlettutorial.constant.SystemConstant;
 import com.jspservlettutorial.model.NewModel;
 import com.jspservlettutorial.service.INewService;
+import com.jspservlettutorial.utils.FormUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -20,8 +21,19 @@ public class NewController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        NewModel model = new NewModel();
-        model.setListResult(newService.findAll());
+        NewModel model = FormUtil.toModel(NewModel.class, req);
+//        String pageStr = req.getParameter("page");
+//        String maxPageItemStr = req.getParameter("maxPageItem");
+//        if (pageStr != null) {
+//            model.setPage(Integer.parseInt(pageStr));
+//        } else model.setPage(1);
+//        if (maxPageItemStr != null) {
+//            model.setMaxPageItem(Integer.parseInt(maxPageItemStr));
+//        }
+        Integer offset = (model.getPage() - 1) * model.getMaxPageItem();
+        model.setListResult(newService.findAll(offset, model.getMaxPageItem()));
+        model.setTotalPage(newService.getTotalItem());
+        model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getMaxPageItem()));//totalpage = totalitem / maxpageitem
         req.setAttribute(SystemConstant.MODEL, model);
         req.getRequestDispatcher("/view/admin/new/list.jsp").forward(req, resp);
     }
